@@ -45,7 +45,7 @@ class GoalBasedVacuumCleaner:
     def run(self, max_steps=10):
         # Run the vacuum cleaner agent until the goal is achieved or max steps are reached
         steps = 0
-        while not self.is_goal_achieved() and steps < max_steps:
+        while not self.is_goal_achieved():
             print(f"Internal State -\nLocation: {self.location}, Status: {self.status}\nPrevious Action: {self.previous_action}")
             action = self.rule_match()
 
@@ -57,11 +57,8 @@ class GoalBasedVacuumCleaner:
 
             steps += 1
 
-        if self.is_goal_achieved():
-            print("Goal achieved: Both locations are clean.")
-        else:
-            print("Goal not achieved: Reached maximum steps.")
-
+        print(f"Goal achieved in {steps} steps: Both Locations are clean")
+        
 # Calling functions
 vacuum_agent = GoalBasedVacuumCleaner()
 vacuum_agent.run()
