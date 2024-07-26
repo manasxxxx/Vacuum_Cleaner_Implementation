@@ -1,69 +1,59 @@
 import random
 
-class VacuumCleanerAgent:
+class ModelVacuumCleaner:
     def __init__(self):
         # Initialize the agent with a hardcoded initial location 'A'
         self.location = 'A'
-        # Randomly choose the initial status as 'Clean' or 'Dirty'
+        # Randomly choose the initial status as Clean or Dirty
         self.status = random.choice(['Clean', 'Dirty'])
         # Initialize the previous action as None
         self.previous_action = None
+        self.state = {'A': self.status, 'B': random.choice(['Clean', 'Dirty'])} 
 
-    def update_status(self):
-        # Randomly update the status of the current location to 'Clean' or 'Dirty'
-        self.status = random.choice(['Clean', 'Dirty'])
-
-    def decide_action(self):
-        # Decide the next action based on the current status and location
-        if self.status == 'Dirty':
-            # If the status is 'Dirty', the action should be 'Clean'
-            action = 'Clean'
-        else:
-            # If the status is 'Clean', decide the action based on the location
-            if self.location == 'A':
-                # If the location is 'A' and it is clean, move to the right (to location 'B')
-                action = 'Move Right'
-            else:
-                # If the location is 'B' and it is clean, move to the left (to location 'A')
-                action = 'Move Left'
-        return action
+        self.model = self.state  # Model tells how the next state depends on current state and action
+        self.rules = {
+            ('A', 'Clean'): 'Move Right',
+            ('A', 'Dirty'): 'Clean',
+            ('B', 'Clean'): 'Move Left',
+            ('B', 'Dirty'): 'Clean'
+        }
 
     def update_state(self, action):
         # Update the internal state based on the action taken
         self.previous_action = action  # Update the previous action
         if action == 'Move Right':
-            # If the action is 'Move Right', update the location to 'B'
             self.location = 'B'
-            # Randomly update the status of the new location 'B'
-            self.update_status()
+            self.status = random.choice(['Clean', 'Dirty'])
         elif action == 'Move Left':
-            # If the action is 'Move Left', update the location to 'A'
             self.location = 'A'
-            # Randomly update the status of the new location 'A'
-            self.update_status()
+            self.status = random.choice(['Clean', 'Dirty'])
         elif action == 'Clean':
-            # If the action is 'Clean', update the status to 'Clean'
             self.status = 'Clean'
 
+        self.state[self.location] = self.status
+    
+    def rule_match(self):
+        # Match the rule based on the current state
+        return self.rules[(self.location, self.state[self.location])]
+
+
     def run(self, steps=10):
-        # Run the vacuum cleaner agent for a given number of steps (default is 10)
+        # Run the vacuum cleaner agent for a given number of steps (we put it as 10)
         for _ in range(steps):
-            # Print the current internal state
             print(f"Internal State -\nLocation: {self.location}, Status: {self.status}\nPrevious Action: {self.previous_action}")
-            # Decide the next action based on the current state
-            action = self.decide_action()
-            # Print the action taken
+            action = self.rule_match()
+
             print(f"\nAction Taken -\n{action}")
-            # Update the state based on the action taken
+
             self.update_state(action)
-            # Print the next state after taking the action
+
             if action == 'Clean':
-                # If the action was 'Clean', print the next state with the updated status
+                # If the action was Clean, print the next state with the updated status
                 print(f"\nNext State -\nLocation: {self.location}, Status: {self.status}\n")
             else:
                 # If the action was 'Move Right' or 'Move Left', print the next state with the updated location
                 print(f"\nNext State -\nLocation: {self.location}\n")
 
-# Create an instance of the vacuum cleaner agent and run it
-vacuum_agent = VacuumCleanerAgent()
+# Calling functions
+vacuum_agent = ModelVacuumCleaner()
 vacuum_agent.run()
