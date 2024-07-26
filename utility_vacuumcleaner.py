@@ -16,11 +16,11 @@ class UtilityBasedVacuumCleaner:
             ('B', 'Clean'): 'Move Left',
             ('B', 'Dirty'): 'Clean'
         }
-        self.performance_measure = 0  # Initializing performance measure
+        self.performance_measure = 0  # Initialize performance measure
 
     def update_state(self, action):
         # Update the internal state based on the action taken
-        self.previous_action = action  # Updating the previous action
+        self.previous_action = action  # Update the previous action
         if action == 'Move Right':
             self.location = 'B'
             self.status = random.choice(['Clean', 'Dirty'])
