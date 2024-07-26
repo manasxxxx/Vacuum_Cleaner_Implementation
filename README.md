@@ -33,6 +33,10 @@ Goal-based decision making considers:
 
 ![image](https://github.com/user-attachments/assets/dfee2303-455e-45ab-8313-89af0628fe5c)
 
+# BRIEF DESCRIPTION OF THE CODE FOR GOAL BASED AGENT
+
+This code defines a goal-based vacuum cleaner agent whose primary goal is to ensure that both locations 'A' and 'B' are clean. The agent starts at location 'A' with a randomly assigned status of either 'Clean' or 'Dirty' for both locations. It determines its actions based on its current location and the cleanliness status of both locations. The agent can move left or right between the two locations or clean the current location if it is dirty. The update_state method updates the internal state based on the action taken, while the rule_match method decides the next action required to achieve the goal. The is_goal_achieved method checks if both locations are clean. The run method allows the agent to operate continuously, taking actions and updating its state, until the goal of cleaning both locations is achieved. The number of steps taken to achieve the goal is printed once both locations are clean.
+
 
 # Utility-Based Agents
 
