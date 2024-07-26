@@ -45,6 +45,23 @@ Performance measure needs to allow comparison of different world states accordin
 
 ![image](https://github.com/user-attachments/assets/f56cac13-d998-44b5-8cad-b5efb73a2bd7)
 
+# BRIEF DESCRIPTION OF THE CODE FOR UTILITY BASED AGENT
+
+This code defines a UtilityBasedVacuumCleaner class, which models a vacuum cleaner agent operating in a simple environment with two locations, 'A' and 'B'. The agent's goal is to keep both locations clean, and its actions are determined by a set of predefined rules. The agent can either move left, move right, or clean a location.
+
+The agent's performance is measured by a performance metric that decreases when the vacuum cleaner moves unnecessarily (i.e., moves to a location that is already clean). The agent runs for a given number of steps, updating its state and calculating its performance at each step. At the end of the run, the agent's rationality is evaluated based on whether it has traveled unnecessarily five or more times. If the performance measure shows five or more unnecessary moves, the agent is deemed irrational.
+
+# LEARNING OUTCOMES
+
+Model-Based Agents: Learn to create agents using a world model to update internal states and actions.
+
+Goal-Based Agents: Implement agents that make decisions to achieve specific goals.
+
+Utility-Based Agents: Develop agents that optimize performance based on utility values.
+
+Performance and Rationality: Measure agent performance and evaluate rationality based on actions and outcomes.
+
+
 
 
 
